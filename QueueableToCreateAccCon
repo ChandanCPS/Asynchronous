@@ -1,0 +1,22 @@
+public class QueueableClass implements Queueable{
+    
+    private List<Account> acc;
+    // Creating local variable to put values from AccQuery
+    
+    public QueueableClass(List<Account> accQuery){ // This is our Constructor
+        this.acc = accQuery;        
+    }
+    
+    public void execute (QueueableContext qCont){
+        List<Contact> conListToAdd = new List<Contact>();
+        for(Account accObj:acc){
+            Contact conObj = new Contact();
+            conObj.lastName = accObj.name;
+            conObj.AccountId = accObj.Id;
+            conListToAdd.add(conObj);
+        }
+    if(!conListToAdd.isEmpty()){
+        INSERT conListToAdd;
+    }
+  }
+}
